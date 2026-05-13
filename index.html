@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>GrowSpace Mini Shop</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  background:#eef2ee;
+  overflow-x:hidden;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#66bb6a;
+  border-radius:20px;
+}
+
+/* ================= INTRO SCREEN ================= */
+
+.intro-screen{
+  min-height:100vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+  url('https://images.unsplash.com/photo-1493666438817-866a91353ca9?q=80&w=1400&auto=format&fit=crop');
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+}
+
+.intro-box{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,0.2);
+  padding:45px;
+  border-radius:35px;
+  text-align:center;
+  color:white;
+  max-width:550px;
+  animation:fade 1s ease;
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
+
+.intro-box h1{
+  font-size:52px;
+  margin-bottom:18px;
+}
+
+.intro-box p{
+  font-size:17px;
+  line-height:1.8;
+  margin-bottom:30px;
+}
+
+.start-btn{
+  background:linear-gradient(135deg,#66bb6a,#2e7d32);
+  color:white;
+  padding:15px 35px;
+  border:none;
+  border-radius:30px;
+  font-size:17px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.start-btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* ================= HOME SCREEN ================= */
+
+.home-screen{
+  min-height:100vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+  url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop');
+  background-size:cover;
+  background-position:center;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  text-align:center;
+  color:white;
+  padding:20px;
+  position:relative;
+}
+
+.home-screen::before{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+  background:rgba(255,255,255,0.08);
+  border-radius:50%;
+  top:-100px;
+  left:-100px;
+}
+
+.home-screen::after{
+  content:"";
+  position:absolute;
+  width:300px;
+  height:300px;
+  background:rgba(255,255,255,0.06);
+  border-radius:50%;
+  bottom:-100px;
+  right:-100px;
+}
+
+.home-screen h1{
+  font-size:60px;
+  margin-bottom:15px;
+  animation:fadeDown 1s ease;
+  z-index:2;
+}
+
+.home-screen p{
+  max-width:650px;
+  margin-bottom:40px;
+  font-size:18px;
+  line-height:1.7;
+  z-index:2;
+  animation:fadeUp 1s ease;
+}
+
+.category-container{
+  display:flex;
+  gap:25px;
+  flex-wrap:wrap;
+  justify-content:center;
+  z-index:2;
+}
+
+.category-card{
+  width:240px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.2);
+  padding:25px;
+  border-radius:28px;
+  transition:0.4s;
+  cursor:pointer;
+  box-shadow:0 10px 20px rgba(0,0,0,0.15);
+}
+
+.category-card:hover{
+  transform:translateY(-12px) scale(1.05);
+  background:rgba(255,255,255,0.25);
+}
+
+.category-card h3{
+  margin-top:15px;
+  margin-bottom:10px;
+  font-size:24px;
+}
+
+.category-card p{
+  font-size:14px;
+  line-height:1.6;
+}
+
+.icon{
+  font-size:55px;
+}
+
+/* ================= SHOP ================= */
+
+.shop-page{
+  display:none;
+  animation:fade 0.6s ease;
+}
+
+header{
+  background:rgba(46,125,50,0.92);
+  backdrop-filter:blur(10px);
+  color:white;
+  padding:25px;
+  text-align:center;
+  font-size:22px;
+  letter-spacing:1px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.hero-banner{
+  background:
+  linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)),
+  url('https://images.unsplash.com/photo-1493666438817-866a91353ca9?q=80&w=1200&auto=format&fit=crop');
+  background-size:cover;
+  background-position:center;
+  height:260px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+
+.hero-banner h2{
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+.hero-banner p{
+  max-width:600px;
+  line-height:1.7;
+}
+
+.search{
+  padding:25px;
+  text-align:center;
+}
+
+input{
+  padding:14px 20px;
+  width:85%;
+  max-width:430px;
+  border-radius:30px;
+  border:none;
+  outline:none;
+  font-size:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+.container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:28px;
+  padding:25px;
+  padding-bottom:180px;
+}
+
+.card{
+  background:white;
+  border-radius:24px;
+  overflow:hidden;
+  transition:0.35s;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+  position:relative;
+}
+
+.card:hover{
+  transform:translateY(-12px);
+}
+
+.card::before{
+  content:"BEST";
+  position:absolute;
+  top:15px;
+  left:15px;
+  background:#ff7043;
+  color:white;
+  padding:5px 12px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:600;
+}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card-content{
+  padding:18px;
+  text-align:center;
+}
+
+.card-content h4{
+  margin:10px 0;
+  font-size:20px;
+}
+
+.desc{
+  font-size:13px;
+  color:#666;
+  margin-bottom:12px;
+  line-height:1.6;
+}
+
+.price{
+  color:#2e7d32;
+  font-weight:bold;
+  font-size:20px;
+}
+
+.rating{
+  margin-top:8px;
+  color:gold;
+  font-size:14px;
+}
+
+button{
+  margin-top:12px;
+  padding:11px;
+  border:none;
+  cursor:pointer;
+  transition:0.3s;
+  font-family:'Poppins',sans-serif;
+}
+
+.buy-btn{
+  width:100%;
+  background:linear-gradient(135deg,#2e7d32,#66bb6a);
+  color:white;
+  border-radius:18px;
+  font-weight:600;
+}
+
+.buy-btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 6px 15px rgba(46,125,50,0.3);
+}
+
+.qty-control{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin-top:12px;
+}
+
+.qty-control button{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:#2e7d32;
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.qty-control span{
+  font-size:18px;
+  font-weight:600;
+}
+
+.cart{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(12px);
+  padding:18px;
+  box-shadow:0 -4px 15px rgba(0,0,0,0.15);
+  border-top-left-radius:25px;
+  border-top-right-radius:25px;
+}
+
+.cart-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+#cart-items{
+  max-height:100px;
+  overflow-y:auto;
+  font-size:14px;
+}
+
+.checkout-btn{
+  width:100%;
+  background:#ff7043;
+  color:white;
+  border-radius:15px;
+  font-weight:600;
+}
+
+.checkout-btn:hover{
+  background:#f4511e;
+}
+
+.back-btn{
+  background:white;
+  color:#2e7d32;
+  padding:10px 20px;
+  border-radius:20px;
+  margin-top:15px;
+  font-weight:600;
+}
+
+.empty{
+  text-align:center;
+  padding:50px;
+  color:#777;
+  font-size:18px;
+}
+
+/* ANIMATION */
+
+@keyframes fade{
+  from{
+    opacity:0;
+  }
+  to{
+    opacity:1;
+  }
+}
+
+@keyframes fadeDown{
+  from{
+    transform:translateY(-40px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+@keyframes fadeUp{
+  from{
+    transform:translateY(40px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  .home-screen h1{
+    font-size:42px;
+  }
+
+  .hero-banner h2{
+    font-size:28px;
+  }
+
+  .intro-box h1{
+    font-size:38px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+
+<section class="intro-screen" id="intro">
+
+  <div class="intro-box">
+
+    <h1>🌿 Welcome To GrowSpace</h1>
+
+    <p>
+      Temukan dekor kamar aesthetic, cozy, dan estetik favorit kamu ✨
+    </p>
+
+    <button class="start-btn" onclick="enterHome()">
+      Masuk Sekarang
+    </button>
+
+  </div>
+
+</section>
+
+<!-- HOME -->
+
+<section class="home-screen" id="home">
+
+  <h1>🌿 GrowSpace</h1>
+
+  <p>
+    Bikin kamar kamu makin cozy, estetik, dan aesthetic vibes ✨
+    Temukan dekor kamar impianmu sekarang!
+  </p>
+
+  <div class="category-container">
+
+    <div class="category-card" onclick="openShop('Kalcer')">
+      <div class="icon">🪞</div>
+      <h3>Kalcer</h3>
+      <p>Nuansa aesthetic kekinian dengan dekor viral & cozy vibes.</p>
+    </div>
+
+    <div class="category-card" onclick="openShop('Asri')">
+      <div class="icon">🌿</div>
+      <h3>Asri</h3>
+      <p>Suasana hijau, natural, adem, dan fresh banget.</p>
+    </div>
+
+    <div class="category-card" onclick="openShop('Kece')">
+      <div class="icon">✨</div>
+      <h3>Kece</h3>
+      <p>Setup kamar glowing modern aesthetic untuk anak muda.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SHOP -->
+
+<section class="shop-page" id="shop">
+
+<header>
+
+  <h2 id="shop-title">🌿 GrowSpace Mini Shop</h2>
+
+  <button class="back-btn" onclick="backHome()">
+    ⬅ Kembali
+  </button>
+
+</header>
+
+<div class="hero-banner">
+
+  <h2>Room Decor Collection</h2>
+
+  <p>
+    Upgrade kamar kamu jadi lebih hidup, estetik, dan nyaman ✨
+  </p>
+
+</div>
+
+<div class="search">
+
+  <input type="text"
+  placeholder="Cari produk..."
+  onkeyup="searchProduct(this.value)">
+
+</div>
+
+<div class="container" id="product-list"></div>
+
+<div class="cart">
+
+  <div class="cart-top">
+
+    <h3>🛒 Keranjang</h3>
+
+    <span>
+      Total:
+      <strong>
+        Rp <span id="total">0</span>
+      </strong>
+    </span>
+
+  </div>
+
+  <div id="cart-items"></div>
+
+  <button class="checkout-btn" onclick="checkout()">
+    Checkout Sekarang
+  </button>
+
+</div>
+
+</section>
+
+<script>
+
+const products = [
+
+/* ================= ASRI ================= */
+
+{
+  category:"Asri",
+  name:"Mini Jungle Set",
+  desc:"Tanaman mini aesthetic untuk meja belajar.",
+  price:25000,
+  rating:"⭐⭐⭐⭐⭐",
+  img:"mini set tanaman.png"
+},
+
+{
+  category:"Asri",
+  name:"Pot Estetik",
+  desc:"Pot lucu minimalis buat dekor kamar.",
+  price:30000,
+  rating:"⭐⭐⭐⭐",
+  img:"35bb2b205328fb0bd5b931170d81be6d@resize_w450_nl.jpg"
+},
+
+{
+  category:"Asri",
+  name:"Terrarium Mini",
+  desc:"Dekor hijau adem buat suasana fresh.",
+  price:60000,
+  rating:"⭐⭐⭐⭐⭐",
+  img:"images.png"
+},
+
+{
+  category:"Asri",
+  name:"DIY Plant Kit",
+  desc:"Paket tanam mini untuk healing.",
+  price:50000,
+  rating:"⭐⭐⭐⭐",
+  img:"SmallKit-Zoom2.png"
+},
+
+/* ================= KALCER ================= */
+
+{
+  category:"Kalcer",
+  name:"Kaca Kembung",
+  desc:"Kaca aesthetic viral buat mirror selfie.",
+  price:85000,
+  rating:"⭐⭐⭐⭐⭐",
+  img:"kaca kembung.png"
+},
+
+{
+  category:"Kalcer",
+  name:"Box Music",
+  desc:"Music box lucu buat dekor meja kamar.",
+  price:45000,
+  rating:"⭐⭐⭐⭐",
+  img:"https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1000&auto=format&fit=crop"
+},
+
+{
+  category:"Kalcer",
+  name:"Poster Aesthetic",
+  desc:"Poster aesthetic untuk mempercantik dinding kamar.",
+  price:15000,
+  rating:"⭐⭐⭐⭐",
+  img:"poster.jpg"
+},
+
+{
+  category:"Kalcer",
+  name:"Jam Digital LED",
+  desc:"Jam meja modern glowing aesthetic.",
+  price:70000,
+  rating:"⭐⭐⭐⭐⭐",
+  img:"jam.png"
+},
+
+/* ================= KECE ================= */
+
+{
+  category:"Kece",
+  name:"Room Glow Up Kit",
+  desc:"Paket dekor aesthetic lengkap.",
+  price:120000,
+  rating:"⭐⭐⭐⭐⭐",
+  img:"kit.jpg"
+},
+
+{
+  category:"Kece",
+  name:"Lampu Tumblr",
+  desc:"Lampu aesthetic cozy untuk malam hari.",
+  price:20000,
+  rating:"⭐⭐⭐⭐⭐",
+  img:"86a1c08224bf4dc4b3c2cfe492112c617853.jpg"
+},
+
+{
+  category:"Kece",
+  name:"Neon Light",
+  desc:"Lampu neon modern buat setup gaming & kamar.",
+  price:95000,
+  rating:"⭐⭐⭐⭐⭐",
+  img:"neon light.png"
+},
+
+{
+  category:"Kece",
+  name:"Speaker RGB",
+  desc:"Speaker mini dengan lampu RGB aesthetic.",
+  price:110000,
+  rating:"⭐⭐⭐⭐",
+  img:"speaker.jpg"
+}
+
+];
+
+let cart = JSON.parse(localStorage.getItem('cart')) || {};
+let totalHarga = 0;
+let currentCategory = "";
+
+function enterHome(){
+
+  document.getElementById("intro").style.display = "none";
+
+  document.getElementById("home").style.display = "flex";
+}
+
+function openShop(category){
+
+  currentCategory = category;
+
+  document.getElementById("home").style.display = "none";
+
+  document.getElementById("shop").style.display = "block";
+
+  document.getElementById("shop-title").innerHTML =
+  "🌿 " + category + " Room Collection";
+
+  const filtered =
+  products.filter(p => p.category === category);
+
+  renderProducts(filtered);
+}
+
+function backHome(){
+
+  document.getElementById("home").style.display = "flex";
+
+  document.getElementById("shop").style.display = "none";
+}
+
+function formatRupiah(angka){
+
+  return angka.toLocaleString("id-ID");
+}
+
+function renderProducts(list){
+
+  const container =
+  document.getElementById("product-list");
+
+  container.innerHTML = "";
+
+  if(list.length === 0){
+
+    container.innerHTML =
+    `<div class="empty">
+      Produk tidak ditemukan 😢
+    </div>`;
+
+    return;
+  }
+
+  list.forEach(p => {
+
+    let qty = cart[p.name] || 0;
+
+    let controlHTML = "";
+
+    if(qty === 0){
+
+      controlHTML = `
+      <button class="buy-btn"
+      onclick="addFirst('${p.name}')">
+      Beli Sekarang
+      </button>
+      `;
+
+    } else {
+
+      controlHTML = `
+      <div class="qty-control">
+
+        <button onclick="changeQtyCard('${p.name}',-1)">
+        ➖
+        </button>
+
+        <span>${qty}</span>
+
+        <button onclick="changeQtyCard('${p.name}',1)">
+        ➕
+        </button>
+
+      </div>
+      `;
+    }
+
+    container.innerHTML += `
+
+    <div class="card">
+
+      <img src="${p.img}">
+
+      <div class="card-content">
+
+        <h4>${p.name}</h4>
+
+        <p class="desc">${p.desc}</p>
+
+        <p class="price">
+          Rp ${formatRupiah(p.price)}
+        </p>
+
+        <div class="rating">
+          ${p.rating}
+        </div>
+
+        ${controlHTML}
+
+      </div>
+
+    </div>
+
+    `;
+  });
+}
+
+function updateCart(){
+
+  totalHarga = 0;
+
+  let cartHTML = "";
+
+  for(let item in cart){
+
+    let product =
+    products.find(p => p.name === item);
+
+    let jumlah = cart[item];
+
+    let subtotal =
+    product.price * jumlah;
+
+    totalHarga += subtotal;
+
+    cartHTML += `
+
+    <div style="margin-bottom:10px;">
+
+      <strong>${item}</strong><br>
+
+      ${jumlah} x
+      Rp ${formatRupiah(product.price)}
+
+      =
+
+      Rp ${formatRupiah(subtotal)}
+
+    </div>
+
+    `;
+  }
+
+  document.getElementById("cart-items").innerHTML =
+  cartHTML || "Keranjang masih kosong";
+
+  document.getElementById("total").innerText =
+  formatRupiah(totalHarga);
+
+  localStorage.setItem(
+    'cart',
+    JSON.stringify(cart)
+  );
+}
+
+function addFirst(product){
+
+  cart[product] = 1;
+
+  updateCart();
+
+  const filtered =
+  products.filter(
+    p => p.category === currentCategory
+  );
+
+  renderProducts(filtered);
+}
+
+function changeQtyCard(product, change){
+
+  if(!cart[product]){
+
+    cart[product] = 0;
+  }
+
+  cart[product] += change;
+
+  if(cart[product] <= 0){
+
+    delete cart[product];
+  }
+
+  updateCart();
+
+  const filtered =
+  products.filter(
+    p => p.category === currentCategory
+  );
+
+  renderProducts(filtered);
+}
+
+function checkout(){
+
+  if(totalHarga === 0){
+
+    alert("Keranjang kosong!");
+
+  } else {
+
+    alert(
+      "Checkout berhasil ✨\nTotal: Rp " +
+      formatRupiah(totalHarga)
+    );
+
+    cart = {};
+
+    localStorage.removeItem('cart');
+
+    updateCart();
+
+    const filtered =
+    products.filter(
+      p => p.category === currentCategory
+    );
+
+    renderProducts(filtered);
+  }
+}
+
+function searchProduct(keyword){
+
+  const filtered = products.filter(
+    p =>
+    p.category === currentCategory &&
+    p.name.toLowerCase().includes(
+      keyword.toLowerCase()
+    )
+  );
+
+  renderProducts(filtered);
+}
+
+updateCart();
+
+</script>
+
+</body>
+</html>
